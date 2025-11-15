@@ -1,0 +1,47 @@
+# General Configuration
+aws_region   = "us-west-2"
+project_name = "myproject"
+owner        = "DevOps Team"
+cost_center  = "Engineering"
+
+# VPC Configuration - Production with 3 AZs
+vpc_cidr               = "10.0.0.0/16"
+public_subnet_cidrs    = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+private_subnet_cidrs   = ["10.0.10.0/24", "10.0.20.0/24", "10.0.30.0/24"]
+enable_nat_gateway     = true
+
+# Security Configuration - Restrict management access
+web_ingress_cidrs = ["0.0.0.0/0"]
+management_cidrs  = ["10.0.0.0/8", "192.168.1.0/24"]  # Add your office/VPN IP ranges
+app_port         = 8080
+db_port          = 3306
+
+# EC2 Configuration - Production sizing
+instance_type        = "t3.small"
+key_name            = "my-prod-key-pair"  # Replace with your production key pair
+asg_min_size        = 2
+asg_max_size        = 6
+asg_desired_capacity = 3
+
+# RDS Configuration - Production settings
+create_rds                    = true
+db_engine                    = "mysql"
+db_engine_version            = "8.0"
+db_instance_class            = "db.t3.small"
+database_name                = "myapp"
+db_master_username           = "admin"
+db_allocated_storage         = 100
+db_max_allocated_storage     = 1000
+db_backup_retention_period   = 30
+create_read_replica          = true
+
+# S3 Configuration
+create_s3 = true
+
+# Load Balancer Configuration
+create_load_balancer     = true
+alb_access_logs_enabled  = true
+alb_access_logs_bucket   = "my-alb-access-logs-bucket"  # Replace with your bucket
+create_https_listener    = true
+certificate_arn          = "arn:aws:acm:us-west-2:123456789012:certificate/12345678-1234-1234-1234-123456789012"  # Replace with your certificate ARN
+http_redirect_to_https   = true
